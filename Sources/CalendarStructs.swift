@@ -104,7 +104,7 @@ struct CalendarData {
     var months: [Month]
     var totalSections: Int
     var sectionToMonthMap: [Int: Int]
-    var totalDays: Int
+    var totalGeneratedCells: Int
 }
 
 /// Defines a month structure.

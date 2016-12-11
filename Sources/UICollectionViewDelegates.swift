@@ -102,17 +102,23 @@ extension JTAppleCalendarView: UICollectionViewDelegate, UICollectionViewDataSou
     /// Asks your data sourceobject for the number of sections in
     /// the collection view. The number of sections in collectionView.
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return monthMap.count
+        return theData.totalSections
     }
 
 
     /// Asks your data source object for the number of items in the
     /// specified section. The number of rows in section.
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count =  calendarViewLayout.cellCache[section]?.count else {
+        guard let monthIndex = monthMap[section] else {
             developerError(string: "cellCacheSection does not exist.")
             return 0
         }
+        let month = monthInfo[monthIndex]
+        guard let subSection = month.sectionIndexMaps[section] else {
+            developerError(string: "cellCacheSection does not exist.")
+            return 0
+        }
+        let count = month.sections[subSection]
         return count
     }
 

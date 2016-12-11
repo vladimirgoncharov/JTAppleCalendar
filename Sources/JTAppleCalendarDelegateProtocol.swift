@@ -13,7 +13,7 @@ protocol JTAppleCalendarDelegateProtocol: class {
     var cachedConfiguration: ConfigurationParameters! {get set}
     var monthInfo: [Month] {get set}
     var monthMap: [Int: Int] {get set}
-    var totalDays: Int {get}
+    var totalGeneratedCells: Int {get}
     var lastIndexOffset: (IndexPath, UICollectionElementCategory)? {get set}
     
     func numberOfRows() -> Int

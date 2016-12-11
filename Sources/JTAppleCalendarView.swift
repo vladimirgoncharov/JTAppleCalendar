@@ -211,8 +211,8 @@ open class JTAppleCalendarView: UIView {
         get { return monthInfo.count }
     }
 
-    var totalDays: Int {
-        get { return theData.totalDays }
+    var totalGeneratedCells: Int {
+        get { return theData.totalGeneratedCells }
     }
 
     func numberOfItemsInSection(_ section: Int) -> Int {
@@ -770,7 +770,7 @@ extension JTAppleCalendarView {
             let comparison = validConfig.calendar.compare(validConfig.startDate, to: validConfig.endDate, toGranularity: .nanosecond)
             if comparison == ComparisonResult.orderedDescending {
                 assert(false, "Error, your start date cannot be " + "greater than your end date\n")
-                return (CalendarData(months: [], totalSections: 0, sectionToMonthMap: [:], totalDays: 0))
+                return (CalendarData(months: [], totalSections: 0, sectionToMonthMap: [:], totalGeneratedCells: 0))
             }
             
             // Set the new cache
@@ -798,7 +798,7 @@ extension JTAppleCalendarView {
                 totalDays = generatedData.totalDays
             }
         }
-        let data = CalendarData(months: months, totalSections: totalSections, sectionToMonthMap: monthMap, totalDays: totalDays)
+        let data = CalendarData(months: months, totalSections: totalSections, sectionToMonthMap: monthMap, totalGeneratedCells: totalDays)
         return data
     }
 
@@ -970,9 +970,7 @@ extension JTAppleCalendarView {
                 let numberOfRowsForSection =
                     monthData.numberOfRows(for: section,
                                            developerSetRows: numberOfRows())
-                return ((startDate, endDate),
-                        monthNumber.month!,
-                        numberOfRowsForSection)
+                return ((startDate, endDate), monthNumber.month!, numberOfRowsForSection)
             }
             return nil
     }

@@ -135,7 +135,7 @@ open class JTAppleCalendarLayout: UICollectionViewLayout, JTAppleCalendarLayoutP
                                 stride = contentWidth
                                 sectionSize.append(contentWidth)
                             } else {
-                                if totalDayCounter >= delegate.totalDays {
+                                if totalDayCounter >= delegate.totalGeneratedCells {
                                     contentWidth += attribute.frame.width * 7
                                     sectionSize.append(contentWidth)
                                 }
@@ -202,7 +202,7 @@ open class JTAppleCalendarLayout: UICollectionViewLayout, JTAppleCalendarLayoutP
                                 xCellOffset = 0
                                 yCellOffset += attribute.frame.height
                                 contentHeight += attribute.frame.height
-                            } else if totalDayCounter == delegate.totalDays {
+                            } else if totalDayCounter == delegate.totalGeneratedCells {
                                 contentHeight += attribute.frame.height
                             }
                         }
