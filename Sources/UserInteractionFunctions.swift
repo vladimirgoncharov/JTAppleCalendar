@@ -216,10 +216,9 @@ extension JTAppleCalendarView {
                 }
             }
         }
-        
-        
+                
         // If triggering was false, although the selectDelegates weren't called, we do want the cell refreshed. Reload to call itemAtIndexPath
-        if /*triggerSelectionDelegate == false &&*/ allIndexPathsToReload.count > 0 {
+        if triggerSelectionDelegate == false && allIndexPathsToReload.count > 0 {
             delayRunOnMainThread(0.0) {
                 self.batchReloadIndexPaths(allIndexPathsToReload)
             }
