@@ -143,7 +143,7 @@ extension JTAppleCalendarView {
             addToIndexSetToReload(indexPath)
             // If triggereing is enabled, then let their delegate handle the reloading of view, else we will reload the data
             if triggerSelectionDelegate {
-                self.internalCollectionView(self.calendarView, didSelectItemAtIndexPath: indexPath)
+                self.collectionView(self.calendarView, didSelectItemAtIndexPath: indexPath)
             } else { // Although we do not want the delegate triggered, we still want counterpart cells to be selected
                 
                 // Because there is no triggering of the delegate, the cell will not be added to selection and it will not be reloaded. We need to do this here
@@ -166,7 +166,7 @@ extension JTAppleCalendarView {
                 
                 // If delegate triggering is enabled, let the delegate function handle the cell
                 if triggerSelectionDelegate {
-                    self.internalCollectionView(self.calendarView, didDeselectItemAtIndexPath: oldIndexPath)
+                    self.collectionView(self.calendarView, didDeselectItemAtIndexPath: oldIndexPath)
                 } else { // Although we do not want the delegate triggered, we still want counterpart cells to be deselected
                     let cellState = self.cellStateFromIndexPath(oldIndexPath, withDate: oldDate)
                     if let anUnselectedCounterPartIndexPath = self.deselectCounterPartCellIndexPath(oldIndexPath, date: oldDate, dateOwner: cellState.dateBelongsTo) {
