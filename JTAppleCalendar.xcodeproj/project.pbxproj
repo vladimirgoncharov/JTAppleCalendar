@@ -760,12 +760,14 @@
 		6B60DEB51D5BD9DE009174A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		6B60DEB61D5BD9DE009174A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
