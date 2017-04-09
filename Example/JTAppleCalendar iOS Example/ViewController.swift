@@ -256,8 +256,8 @@ class ViewController: UIViewController {
 extension ViewController: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         
-        let startDate = formatter.date(from: "2015 02 01")!
-        let endDate = formatter.date(from: "2016 12 01")!
+        let startDate = formatter.date(from: "2017 02 01")!
+        let endDate = formatter.date(from: "2018 12 01")!
         
         let parameters = ConfigurationParameters(startDate: startDate,
                                                  endDate: endDate,
@@ -301,7 +301,15 @@ extension ViewController: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSo
     }
     
     func scrollDidEndDecelerating(for calendar: JTAppleCalendarView) {
-        self.setupViewsOfCalendar(from: calendarView.visibleDates())
+        let visibleDates = calendarView.visibleDates()
+//        let dateWeShouldNotCross = formatter.date(from: "2017 08 07")!
+//        let dateToScrollBackTo = formatter.date(from: "2017 07 03")!
+//        if visibleDates.monthDates.contains (where: {$0 >= dateWeShouldNotCross}) {
+//            calendarView.scrollToDate(dateToScrollBackTo)
+//            return
+//        }
+        
+        self.setupViewsOfCalendar(from: visibleDates)
     }
 
     func calendar(_ calendar: JTAppleCalendarView, sectionHeaderIdentifierFor range: (start: Date, end: Date), belongingTo month: Int) -> String {
