@@ -159,10 +159,10 @@ extension JTAppleCalendarView: UICollectionViewDelegate, UICollectionViewDataSou
                     pathsToReload.append(contentsOf: counterPathsToReload)
                 }
             }
+            delegate.calendar(self, didDeselectDate: dateInfoDeselectedByUser.date, cell: selectedCell?.view, cellState: cellState)
             if pathsToReload.count > 0 {
                 batchReloadIndexPaths(pathsToReload)
             }
-            delegate.calendar(self, didDeselectDate: dateInfoDeselectedByUser.date, cell: selectedCell?.view, cellState: cellState)
         }
     }
 
@@ -214,9 +214,9 @@ extension JTAppleCalendarView: UICollectionViewDelegate, UICollectionViewDataSou
                 pathsToReload.append(contentsOf: counterPathsToReload)
             }
         }
+        delegate.calendar(self, didSelectDate: infoOfDateSelectedByUser.date, cell: selectedCell?.view, cellState: cellState)
         if pathsToReload.count > 0 {
             batchReloadIndexPaths(pathsToReload)
         }
-        delegate.calendar(self, didSelectDate: infoOfDateSelectedByUser.date, cell: selectedCell?.view, cellState: cellState)
     }
 }
