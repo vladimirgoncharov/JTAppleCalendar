@@ -68,9 +68,10 @@ class JTAppleCalendarLayout: UICollectionViewLayout, JTAppleCalendarLayoutProtoc
     
     var delayedExecutionClosure: [(() -> Void)] = []
     func executeDelayedTasks() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            let tasksToExecute = self.delayedExecutionClosure
-            self.delayedExecutionClosure.removeAll()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+            guard let sself = self else { return }
+            let tasksToExecute = sself.delayedExecutionClosure
+            sself.delayedExecutionClosure.removeAll()
             
             for aTaskToExecute in tasksToExecute {
                 aTaskToExecute()

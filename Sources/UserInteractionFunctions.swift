@@ -358,8 +358,8 @@ extension JTAppleCalendarView {
         if !triggerSelectionDelegate && !allIndexPathsToReload.isEmpty {
             // Because sometimes if not on main thread, it will not get the
             // visible cells in the following function
-            DispatchQueue.main.async {
-                self.batchReloadIndexPaths(Array(allIndexPathsToReload))
+            DispatchQueue.main.async { [weak self] in
+                self?.batchReloadIndexPaths(Array(allIndexPathsToReload))
             }
         }
     }
