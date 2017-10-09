@@ -79,13 +79,22 @@ extension JTAppleCalendarView {
         isScrollInProgress = true
         if let validCompletionHandler = completionHandler { scrollDelayedExecutionClosure.append(validCompletionHandler) }
         self.triggerScrollToDateDelegate = triggerScrollToDateDelegate
-        DispatchQueue.main.async {
+        
+        func _performScroll() {
             self.scrollToItem(at: indexPath, at: position, animated: isAnimationEnabled)
             if (isAnimationEnabled && self.calendarOffsetIsAlreadyAtScrollPosition(forIndexPath: indexPath)) ||
                 !isAnimationEnabled {
                 self.scrollViewDidEndScrollingAnimation(self)
             }
             self.isScrollInProgress = false
+        }
+        
+        if Thread.isMainThread {
+            _performScroll()
+        } else {
+            DispatchQueue.main.async {
+                _performScroll()
+            }
         }
     }
     
@@ -106,13 +115,22 @@ extension JTAppleCalendarView {
         let maxYCalendarOffset = max(0, self.contentSize.height - self.frame.size.height)
         var topOfHeader = CGPoint(x: attributes.frame.origin.x,y: min(maxYCalendarOffset, attributes.frame.origin.y))
         if scrollDirection == .horizontal { topOfHeader.x += extraAddedOffset} else { topOfHeader.y += extraAddedOffset }
-        DispatchQueue.main.async {
+        
+        func _performScroll() {
             self.setContentOffset(topOfHeader, animated: animation)
             if (animation && self.calendarOffsetIsAlreadyAtScrollPosition(forOffset: topOfHeader)) ||
                 !animation {
                 self.scrollViewDidEndScrollingAnimation(self)
             }
             self.isScrollInProgress = false
+        }
+        
+        if Thread.isMainThread {
+            _performScroll()
+        } else {
+            DispatchQueue.main.async {
+                _performScroll()
+            }
         }
     }
     
@@ -173,13 +191,22 @@ extension JTAppleCalendarView {
         self.triggerScrollToDateDelegate = triggerScrollToDateDelegate
         var point = point
         if scrollDirection == .horizontal { point.x += extraAddedOffset } else { point.y += extraAddedOffset }
-        DispatchQueue.main.async() {
+        
+        func _performScroll() {
             self.setContentOffset(point, animated: isAnimationEnabled)
             if (isAnimationEnabled && self.calendarOffsetIsAlreadyAtScrollPosition(forOffset: point)) ||
                 !isAnimationEnabled {
                 self.scrollViewDidEndScrollingAnimation(self)
             }
             self.isScrollInProgress = false
+        }
+        
+        if Thread.isMainThread {
+            _performScroll()
+        } else {
+            DispatchQueue.main.async {
+                _performScroll()
+            }
         }
     }
     
